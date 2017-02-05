@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/* CSS Document */
+/* 19181B,F4CA00,A79E8F,F4DA84,F3E2C3 */
+/*black, yellow, gray, pale yellow, pale tan */
+
+body
+{
+	font-family:Verdana, Geneva, sans-serif;
+}
+table
+{
+	font-family:"Courier New", Courier, monospace;
+	color:#19181b;
+	background-color:#f4da84;
+}
+
+th
+{
+	font-family:"Arial Black", Gadget, sans-serif;
+	padding:10px;
+}
+
+td
+{
+	padding:10px;
+	border:thin;
+	border-color:#a79e8f;
+	background-color:#f3e2c3;
+	text-align:right;
+}
+
+.corner
+{
+	background-color:#f4da84;
+}
+
+.colrow
+{
+	font-style:italic;
+	color:navy;
+}
+
+.allValues
+{
+	font-weight:bold;
+	color:#cc0000;
+}
+
+
+	
+
