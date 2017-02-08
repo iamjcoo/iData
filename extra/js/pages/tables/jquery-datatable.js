@@ -1,6 +1,6 @@
 $(function () {
     $('.js-basic-example').DataTable({
-        responsive: true
+        responsive: true,
     });
 
     //Exportable table
@@ -12,7 +12,6 @@ $(function () {
         ],
         "aaSorting": false,
         "paging": false,
-
 
     });
     

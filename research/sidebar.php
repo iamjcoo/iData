@@ -120,6 +120,19 @@ if(!isset($_SESSION['idataresearch'])){
                                 <?php } ?>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">Researches with Track Records</a>
+                                <ul class="ml-menu">
+                                <?php
+                                    $query = mysqli_query($link, "SELECT * FROM dyear");
+                                    while($res = mysqli_fetch_array($query)){
+                                ?>
+                                    <li>
+                                        <a href="trackexport.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                    </li>
+                                <?php } ?>
+                                </ul>
+                            </li>
                          </ul>
                     </li>
                 </ul>

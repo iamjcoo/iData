@@ -101,11 +101,11 @@ if(isset($_GET['logout'])){
                     <div class="card">
                         <div class="header">
                             <h2>
-                                RESEARCHES WITH TRACK RECORDS <?php echo $_GET['period']; ?>
+                                RESEARCHES WITH TRACK RECORDS
                             </h2>
                         </div>
                         <div class="body table-responsive">
-                            <table id="myT" class="editable table table-bordered table-striped table-hover dataTable jquery-datatable dt-responsive display nowrap js-exportable" cellspacing="0">
+                            <table id="myT" class="table table-bordered table-striped table-hover dataTable jquery-datatable dt-responsive display nowrap js-exportable" cellspacing="0">
                             </table>
                         </div>
                     </div>

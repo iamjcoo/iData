@@ -98,7 +98,7 @@
     </script>
 </head>
 
-<body class="login-page">
+<body class="login-page" style="background-image: url(extra/images/bg.jpg); background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;">
     <div class="login-box">
         <div class="logo">
             <a href="javascript:void(0);"><b>iData</b></a>
