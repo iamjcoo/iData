@@ -11,8 +11,7 @@ $(function () {
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         "aaSorting": false,
-        "paging": false,
-
+        "paging": false
     });
     
 });

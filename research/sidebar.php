@@ -110,14 +110,32 @@ if(!isset($_SESSION['idataresearch'])){
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">Edit Program & Data</a>
                                 <ul class="ml-menu">
-                                <?php
-                                    $query = mysqli_query($link, "SELECT * FROM dyear");
-                                    while($res = mysqli_fetch_array($query)){
-                                ?>
                                     <li>
-                                        <a href="trackmanage.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">On-Going Researches</a>
+                                            <ul class="ml-menu">
+                                            <?php
+                                                $query = mysqli_query($link, "SELECT * FROM dyear");
+                                                while($res = mysqli_fetch_array($query)){
+                                            ?>
+                                                <li>
+                                                    <a href="trackomanage.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                                </li>
+                                            <?php } ?>
+                                            </ul>
                                     </li>
-                                <?php } ?>
+                                    <li>
+                                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">Completed Researches</a>
+                                            <ul class="ml-menu">
+                                            <?php
+                                                $query = mysqli_query($link, "SELECT * FROM dyear");
+                                                while($res = mysqli_fetch_array($query)){
+                                            ?>
+                                                <li>
+                                                    <a href="trackcmanage.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                                </li>
+                                            <?php } ?>
+                                            </ul>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

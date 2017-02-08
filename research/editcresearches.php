@@ -3,12 +3,7 @@ require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataresearch'])){
     header('Location: ../sign-in.php');
 }else{
-$tmark1 = 0;
-$tmark2 = 0;
-$mark = 0;
-$tmark = 0;
-$i = 0;
-$researcher = "";
+    
 }
 if(isset($_GET['logout'])){
     session_unset();
@@ -21,7 +16,7 @@ if(isset($_GET['logout'])){
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Researches with Track Records <?php echo $_GET['period']; ?></title>
+    <title>iData :: CSPC Databanking System</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.png" type="image/x-icon">
 
@@ -39,15 +34,11 @@ if(isset($_GET['logout'])){
     <link href="../extra/plugins/animate-css/animate.css" rel="stylesheet" />
     <link href="../extra/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
-    <!-- JQuery DataTable Css -->
-    <link href="../extra/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-
     <!-- Custom Css -->
     <link href="../extra/css/style.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../extra/css/themes/all-themes.css" rel="stylesheet" />
-    
     <script language="JavaScript">
 
         document.onkeypress = function (event) {
@@ -69,7 +60,6 @@ if(isset($_GET['logout'])){
                 return false;
             }
         }
-        
     </script>
 </head>
 
@@ -101,13 +91,40 @@ if(isset($_GET['logout'])){
                     <div class="card">
                         <div class="header">
                             <h2>
-                                RESEARCHES WITH TRACK RECORDS <?php echo $_GET['period']; ?>
+                                COMPLETED RESEARCH
+                                <small>Edit Completed Research of <?php 
+                                $researcher = $_GET['author'];
+                                $query = mysqli_query($link, "SELECT * FROM researcher WHERE id = '$researcher'");
+                                $res = mysqli_fetch_assoc($query);
+                                echo $res['researcher'];
+                                ?>
+                                </small>
                             </h2>
                         </div>
-                        <div class="body table-responsive">
-                            <table id="myT" class="editable table table-bordered table-striped table-hover dataTable jquery-datatable dt-responsive display nowrap js-exportable" cellspacing="0">
-                            </table>
+                        <div class="body">
+                            <form id="add" name="add">
+                                <div class="row clearfix">
+                                    <?php
+                                        $reid = $_GET['id'];
+                                        $query1 = mysqli_query($link, "SELECT * FROM cresearcher WHERE id = '$reid'");
+                                        $res1=mysqli_fetch_assoc($query1);
+                                    ?>
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-float">
+                                            <div class="form-line focused">
+                                                <input value="<?php echo $res1['research']; ?>" type="text" id="cresearch" class="form-control" required>
+                                                <input value="<?php echo $_GET['id']; ?>" type="hidden" id="rid" class="form-control" required>
+                                                <label class="form-label">Completed Research</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                    <button type="button" class="btn bg-teal waves-effect" id="addu">SUBMIT</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+                        
                     </div>
              </div>
         </div>
@@ -141,111 +158,50 @@ if(isset($_GET['logout'])){
     <script src="../extra/plugins/jquery-validation/jquery.validate.js"></script>
     <!-- Bootstrap Notify Plugin Js -->
     <script src="../extra/plugins/bootstrap-notify/bootstrap-notify.js"></script>
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="../extra/plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="../extra/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-    <script src="../extra/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-    <script src="../extra/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-    <script src="../extra/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="../extra/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-    <script src="../extra/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-    <script src="../extra/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="../extra/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-    <script src="//cdn.rawgit.com/ashl1/datatables-rowsgroup/v1.0.0/dataTables.rowsGroup.js"></script>
-    
+
     <!-- Demo Js -->
     <script src="../extra/js/demo.js"></script>
-    
     <script>
     $(document).ready(function()
 { 
        $(document).bind("contextmenu",function(e){
               return false;
        }); 
-       $(".delete").click(function() {
-        var data = $(".delete").val();
-            if (confirm("Do you really want to delete this program data?"))
-            {
-                var row = $(this).parents('tr');
-
-                $.post("queryresearcher.php", {
-                data: data,
-                }, function(data) {
-                $.notify({
-                    // options
-                    message: 'Successfully Deleted!' 
-                    },{
-                        // settings
-                        type: 'success'
-                    });
-                });
-                row.slideUp('slow', function() {$(row).remove();});
-            }
-            return false;
-        });
-      
-       var data = [
-    <?php
-        $query1 = mysqli_query($link, "SELECT * FROM researcher");
-        while($res = mysqli_fetch_array($query1)){
-            $mark = $mark + 1;
-            $rid = $res['id'];
-            $researcher = $res['researcher'];
-            $query2 = mysqli_query($link, "SELECT * FROM cresearcher WHERE researcher = '$rid'");
-            while($res2 = mysqli_fetch_array($query2)){
-                $completed[$tmark1] = $res2['research'];
-                $tmark1++;
-                //echo $tmark1;
-            }
-            $query3 = mysqli_query($link, "SELECT * FROM oresearch WHERE researcher = '$rid'");
-            while($res3 = mysqli_fetch_array($query3)){
-                $ongoing[$tmark2] = $res3['research'];
-                $tmark2++;
-               // echo $tmark2;
-            }
-            if($tmark1>$tmark2){
-                $tmark = $tmark1;
-            }else{
-                $tmark = $tmark2;
-            }
-            while($i < $tmark){
-            echo '["'.$researcher.'","'.@$completed[$i].'","'.@$ongoing[$i].'"],';
-            $i++;
-            }
-            $tmark1=0;
-            $tmark2=0;
-            $i=0;
-        }
-
-
-    ?>
-  ];
-  var table = $('.js-exportable').DataTable({
-    columns: [
-        {
-            name: 'second',
-            title: 'Researcher',
-        },
-        {
-            title: 'Completed Researches',
-        }, 
-        {
-            title: 'On-going Researches',
-        },
-    ],
-    data: data,
-    rowsGroup: [
-      'second:name'
-    ],
-    pageLength: '20',
-     dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        
-    });
+       
+       
 });
-    
+
+    $(document).ready(function() {
+        $("#addu").click(function() {
+        var rid = $("#rid").val();
+        var research = $("#cresearch").val();
+        if (rid == '' || research == '') {
+         $.notify({
+            // options
+            message: 'Please fill in all the feilds!' 
+            },{
+                // settings
+                type: 'warning'
+            });
+        } else {
+        // Returns successful data submission message when the entered information is stored in database.
+        $.post("queryeditcresearch.php", {
+        rid: rid,
+        research: research,
+        }, function(data) {
+        $.notify({
+            // options
+            message: 'Successfully Edited!' 
+            },{
+                // settings
+                type: 'success'
+            });
+
+        });
+        $('#add')[0].reset(); // To reset form fields
+        }
+        });
+    });
     
 </script>
 </body>
