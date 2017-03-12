@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataregistrar'])){
     header('Location: ../sign-in.php');
@@ -66,7 +66,7 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -198,7 +198,7 @@ if(isset($_GET['logout'])){
         
 });
     $(".delete").click(function() {
-        var data = $(".delete").val();
+        var data = $(this).val();
             if (confirm("Do you really want to delete this program data?"))
             {
                 var row = $(this).parents('tr');

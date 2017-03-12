@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataregistrar'])){
     header('Location: ../sign-in.php');
@@ -77,7 +77,7 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">

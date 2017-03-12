@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataresearch'])){
     header('Location: ../sign-in.php');
@@ -67,7 +67,7 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -106,8 +106,8 @@ if(isset($_GET['logout'])){
                                 <thead>
                                     <tr>
                                         <th>Action</th>
-                                        <th>Type of Research</th>
                                         <th>Research Title</th>
+                                        <th>Type of Research</th>
                                         <th>Project/ Study Duration</th>
                                         <th>Mo. & Year Started</th>
                                         <th>Mo. & Year Completed</th>
@@ -141,13 +141,13 @@ if(isset($_GET['logout'])){
                                             $did = $r['id'];
                                             $period1 = $period . "-01-01";
                                             $period2 = $period . "-12-31";
-                                            $qu = mysqli_query($link, "SELECT * FROM r_publish WHERE delivery_unit = '$did' AND date_completed >= '$period1' AND date_completed <= '$period2'");
+                                            $qu = mysqli_query($link, "SELECT * FROM r_publish WHERE delivery_unit = '$did' AND date_published >= '$period1' AND date_published <= '$period2'");
                                             while($re = mysqli_fetch_array($qu)){
                                             ?>
                                             <tr>
                                                 <th><a href="pubedit.php?period=<?php echo $period; ?>&id=<?php echo $re['id']; ?>"><button type="button"  class="btn bg-teal btn-sm waves-effect"><i class="material-icons">create</i></button></a>&nbsp;<button type="button" value="<?php echo $re['id']; ?>"" class="delete btn bg-red btn-sm waves-effect"><i class="material-icons">delete</i></button> </th>
-                                                <td><?php echo $re['type']; ?></td>
                                                 <td><?php echo $re['title']; ?></td>
+                                                <td><?php echo $re['type']; ?></td>
                                                 <td><?php echo $re['p_duration']; ?></td>
                                                 <td><?php echo $re['date_started']; ?></td>
                                                 <td><?php echo $re['date_completed']; ?></td>
@@ -216,7 +216,7 @@ if(isset($_GET['logout'])){
         
 });
     $(".delete").click(function() {
-        var data = $(".delete").val();
+        var data = $(this).val();
             if (confirm("Do you really want to delete this program data?"))
             {
                 var row = $(this).parents('tr');

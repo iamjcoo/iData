@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataregistrar'])){
     header('Location: ../sign-in.php');
@@ -81,7 +81,7 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -112,7 +112,11 @@ if(isset($_GET['logout'])){
                             <h2>
                                 BOARD EXAM
                             </h2>
-                            <?php $period = $_GET['period']; ?>
+                            <?php 
+                                $pid = $_GET['period']; 
+                                $sql = mysqli_query($link, "SELECT * FROM dyear WHERE id ='$pid'");
+                                $res = mysqli_fetch_assoc($sql);
+                                $period = $res['year']; ?>
                             <small>Edit or Delete Data on Board Exan for <?php echo $period; ?></small>
                         </div>
                         <div class="body table-responsive">
@@ -260,7 +264,7 @@ if(isset($_GET['logout'])){
         
 });
     $(".delete").click(function() {
-        var data = $(".delete").val();
+        var data = $(this).val();
             if (confirm("Do you really want to delete this program data?"))
             {
                 var row = $(this).parents('tr');

@@ -74,12 +74,12 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red" onload="init()">
+<body class="theme-blue" onload="init()">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
-                <div class="spinner-layer pl-red">
+                <div class="spinner-layer pl-blue">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
                     </div>
@@ -97,7 +97,6 @@ if(isset($_GET['logout'])){
     <?php require_once('sidebar.php'); ?>
     <section class="content">
         <div class="container-fluid">
-            
             <div class="block-header">
                 <h2>
                     Performance Analysis using CHAID Algorithm
@@ -112,9 +111,7 @@ if(isset($_GET['logout'])){
 
                     </div>
                   </div>
-                  
                   <div>
-                  
                     <textarea hidden id="mySavedModel" style="width:100%;height:720px;">{ "class": "go.TreeModel",
                   "nodeDataArray": [
                         <?php require_once('api.php'); ?>
@@ -124,8 +121,9 @@ if(isset($_GET['logout'])){
                   </div>
                 </div>
             </div>
-          </div>
-        </section>
+
+        </div>
+      </section>
 
     <!-- Jquery Core Js -->
     <script src="../extra/plugins/jquery/jquery.min.js"></script>
@@ -144,7 +142,6 @@ if(isset($_GET['logout'])){
 
     <!-- Chart Plugins Js -->
     <script src="../extra/plugins/chartjs/Chart.bundle.js"></script>
-
     <!-- Custom Js -->
     <script src="../extra/js/admin.js"></script>
     <script src="../extra/js/pages/charts/chartjs.js"></script>
@@ -191,9 +188,10 @@ if(isset($_GET['logout'])){
                 alternateAngle: 90,
                 alternateLayerSpacing: 35,
                 alternateAlignment: go.TreeLayout.AlignmentBus,
-                alternateNodeSpacing: 20
+                alternateNodeSpacing: 20,
+
               }),
-          "undoManager.isEnabled": false // enable undo & redo
+          "undoManager.isEnabled": false // enable undo & blueo
         });
 
     // when the document is modified, add a "*" to the node and enable the "Save" button
@@ -286,7 +284,7 @@ if(isset($_GET['logout'])){
             {
               maxSize: new go.Size(230, 500),
               margin: new go.Margin(6, 10, 6, 2),
-              defaultAlignment: go.Spot.Left
+              defaultAlignment: go.Spot.Left,
             },
             $(go.RowColumnDefinition, { column: 2, width: 4 }),
             $(go.TextBlock, textStyle(),  // the name
@@ -394,6 +392,7 @@ if(isset($_GET['logout'])){
   }
 
 </script>
+
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataadmin'])){
     header('Location: ../sign-in.php');
@@ -63,7 +63,7 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -125,9 +125,10 @@ if(isset($_GET['logout'])){
                                     <div class="col-sm-12">
                                         <select class="form-control show-tick" id="restriction" required>
                                             <option value="">Please Select a Restriction</option>
-                                            <option>Registrar</option>
-                                            <option>Research</option>
-                                            <option>Extension</option>
+                                            <option value="Registrar">Registrar</option>
+                                            <option value="Research">Research</option>
+                                            <option value="Extension">Extension</option>
+                                            <option value="Administrator">Administrator</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-12">
@@ -135,6 +136,43 @@ if(isset($_GET['logout'])){
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                USERS
+                                <small>edit user</small>
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <table class="table table-bordered table-striped table-hover dataTable jquery-datatable dt-responsive display nowrap js-exportable" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>User</th>
+                                        <th>Restriction</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        $q = mysqli_query($link, "SELECT * FROM user");
+                                        while($r = mysqli_fetch_array($q)){
+                                    ?>
+                                    <tr>
+                                        <th><button type="button" value="<?php echo $r['id']; ?>"" class="delete btn bg-red btn-sm waves-effect"><i class="material-icons">delete</i></button> </th>
+                                        <th><?php echo $r['username']; ?></th>
+                                        <th><?php echo $r['restriction']; ?></th>
+                                        <th><?php echo $r['email']; ?> </th>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -215,6 +253,27 @@ if(isset($_GET['logout'])){
         }
         });
     });
+    $(".delete").click(function() {
+        var data = $(this).val();
+            if (confirm("Do you really want to delete this program data?"))
+            {
+                var row = $(this).parents('tr');
+
+                $.post("userdel.php", {
+                data: data,
+                }, function(data) {
+                $.notify({
+                    // options
+                    message: 'Successfully Deleted!' 
+                    },{
+                        // settings
+                        type: 'success'
+                    });
+                });
+                row.slideUp('slow', function() {$(row).remove();});
+            }
+            return false;
+        });
 </script>
 </body>
 

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataregistrar'])){
     header('Location: ../sign-in.php');
@@ -67,7 +67,7 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -98,7 +98,11 @@ if(isset($_GET['logout'])){
                             <h2>
                                 GRADUATE PROGRAMS
                             </h2>
-                            <?php $period = $_GET['period']; ?>
+                            <?php 
+                                $pid = $_GET['period']; 
+                                $sql = mysqli_query($link, "SELECT * FROM dyear WHERE id ='$pid'");
+                                $res = mysqli_fetch_assoc($sql);
+                                $period = $res['year']; ?>
                             <small>Data on Graduates in Undergraduate Programs for <?php echo $period; ?></small>
                         </div>
                         <div class="body table-responsive">
@@ -138,6 +142,7 @@ if(isset($_GET['logout'])){
                                 </tfoot>
                                 <tbody>
                                     <?php
+                                            $period = $_GET['period'];
                                             $qu = mysqli_query($link, "SELECT * FROM graduates WHERE prog_sort ='Graduate' AND year ='$period'");
                                             while($re = mysqli_fetch_array($qu)){
                                             ?>
@@ -213,7 +218,7 @@ if(isset($_GET['logout'])){
         
 });
     $(".delete").click(function() {
-        var data = $(".delete").val();
+        var data = $(this).val();
             if (confirm("Do you really want to delete this program data?"))
             {
                 var row = $(this).parents('tr');

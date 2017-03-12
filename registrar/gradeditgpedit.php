@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataregistrar'])){
     header('Location: ../sign-in.php');
@@ -64,7 +64,7 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -92,7 +92,11 @@ if(isset($_GET['logout'])){
                     <div class="card">
                         <div class="header">
                             <h2>GRADUATE PROGRAM</h2>
-                            <?php $period = $_GET['period']; ?>
+                            <?php 
+                                $pid = $_GET['period']; 
+                                $sql = mysqli_query($link, "SELECT * FROM dyear WHERE id ='$pid'");
+                                $res = mysqli_fetch_assoc($sql);
+                                $period = $res['year']; ?>
                             <small>Edit Data on Enrolment in Graduate Programs for School Year <?php echo $period; ?></small>
                         </div>
                         <div class="body">

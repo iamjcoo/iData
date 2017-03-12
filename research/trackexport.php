@@ -163,7 +163,7 @@ if(isset($_GET['logout'])){
               return false;
        }); 
        $(".delete").click(function() {
-        var data = $(".delete").val();
+        var data = $(this).val();
             if (confirm("Do you really want to delete this program data?"))
             {
                 var row = $(this).parents('tr');

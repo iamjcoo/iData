@@ -250,7 +250,7 @@ if(!isset($_SESSION['idataregistrar'])){
                                     while($res = mysqli_fetch_array($query)){
                                 ?>
                                     <li>
-                                        <a href="boardemanage.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                        <a href="boardemanage.php?period=<?php echo $res['id']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
                                     </li>
                                 <?php } ?>
                                 </ul>
@@ -263,7 +263,7 @@ if(!isset($_SESSION['idataregistrar'])){
                                     while($res = mysqli_fetch_array($query)){
                                 ?>
                                     <li>
-                                        <a href="boardesummary.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                        <a href="boardesummary.php?period=<?php echo $res['id']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
                                     </li>
                                 <?php } ?>
                                 </ul>

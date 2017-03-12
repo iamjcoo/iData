@@ -1,6 +1,7 @@
 <?php
 require_once("../PHPconnect/phpC.php");
-    $period = $_POST['period'];
+    $semester = $_POST['semester'];
+    $sy = $_POST['sy'];
 
-    $query = mysqli_query($link, "INSERT INTO `dyear`(`year`) VALUES ('$period')");
+    $query = mysqli_query($link, "INSERT INTO `period`(`semester`, `sy`) VALUES ('$semester', '$sy')");
 ?>

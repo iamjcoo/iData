@@ -73,7 +73,7 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -171,13 +171,13 @@ if(isset($_GET['logout'])){
     <script src="../extra/js/demo.js"></script>
     <script>
     $(document).ready(function()
-{ 
+    { 
        $(document).bind("contextmenu",function(e){
               return false;
        }); 
-        });
+    });
        $(".delete").click(function() {
-        var data = $(".delete").val();
+        var data = $(this).val();
             if (confirm("Do you really want to delete this program data?"))
             {
                 var row = $(this).parents('tr');

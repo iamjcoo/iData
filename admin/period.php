@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once("../PHPconnect/phpC.php");
 if(!isset($_SESSION['idataadmin'])){
     header('Location: ../sign-in.php');
@@ -63,12 +63,12 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red">
+<body class="theme-blue">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
-                <div class="spinner-layer pl-red">
+                <div class="spinner-layer pl-blue">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
                     </div>
@@ -101,8 +101,16 @@ if(isset($_GET['logout'])){
                                     <div class="col-sm-12">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="number" id="period" class="form-control" required>
-                                                <label class="form-label">Period</label>
+                                                <input type="text" id="semester" class="form-control" requiblue>
+                                                <label class="form-label">Semester (1st/2nd)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" id="sy" class="form-control" requiblue>
+                                                <label class="form-label">School Year</label>
                                             </div>
                                         </div>
                                     </div>
@@ -114,7 +122,41 @@ if(isset($_GET['logout'])){
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                DELIVERY UNITS
+                                <small>Edit delivery units</small>
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <table class="table table-bordeblue table-striped table-hover dataTable jquery-datatable dt-responsive display nowrap js-exportable" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Period</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        $q = mysqli_query($link, "SELECT * FROM period");
+                                        while($r = mysqli_fetch_array($q)){
+                                    ?>
+                                    <tr>
+                                        <th><button type="button" value="<?php echo $r['id']; ?>" class="delete btn bg-blue btn-sm waves-effect"><i class="material-icons">delete</i></button> </th>
+                                        <th><?php echo $r['semester'] . " Semester School Year " . $r['sy']; ?></th>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
     </section>
 
@@ -148,6 +190,7 @@ if(isset($_GET['logout'])){
 
     <!-- Demo Js -->
     <script src="../extra/js/demo.js"></script>
+    <script src="../extra/js/masked.js"></script>
     <script>
     $(document).ready(function()
 { 
@@ -158,8 +201,9 @@ if(isset($_GET['logout'])){
 });
     $(document).ready(function() {
         $("#addu").click(function() {
-        var period = $("#period").val();
-        if (period == '') {
+        var semester = $("#semester").val();
+        var sy = $("#sy").val();
+        if (semester == '' || sy == '') {
          $.notify({
             // options
             message: 'Please fill in all the feilds!' 
@@ -168,9 +212,10 @@ if(isset($_GET['logout'])){
                 type: 'warning'
             });
         } else {
-        // Returns successful data submission message when the entered information is stored in database.
+        // Returns successful data submission message when the enteblue information is stoblue in database.
         $.post("queryperiod.php", {
-        period: period,
+        semester: semester,
+        sy: sy,
         }, function(data) {
         $.notify({
             // options
@@ -184,6 +229,28 @@ if(isset($_GET['logout'])){
         }
         });
     });
+    $(".delete").click(function() {
+        var data = $(this).val();
+            if (confirm("All the data in this year will be deleted. Do you really want to delete this year?"))
+            {
+                var row = $(this).parents('tr');
+                $.post("perioddel.php", {
+                data: data,
+                }, function(data) {
+                $.notify({
+                    // options
+                    message: 'Successfully Deleted!' 
+                    },{
+                        // settings
+                        type: 'success'
+                    });
+                });
+                row.slideUp('slow', function() {$(row).remove();});
+            }
+            return false;
+        });
+    $("#sy").mask("9999-9999");
+    $("#semester").mask("9aa");
 </script>
 </body>
 

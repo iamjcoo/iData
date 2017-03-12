@@ -112,6 +112,70 @@ if(!isset($_SESSION['idataadmin'])){
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                            <i class="material-icons">find_in_page</i>
+                            <span>Research Presentation</span>
+                        </a>
+                        <ul class="ml-menu">
+                                <?php
+                                    $query = mysqli_query($link, "SELECT * FROM dyear");
+                                    while($res = mysqli_fetch_array($query)){
+                                ?>
+                                    <li>
+                                        <a href="rpresentman.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                    </li>
+                                <?php } ?>
+                                </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                            <i class="material-icons">assignment</i>
+                            <span>Research Publication</span>
+                        </a>
+                        <ul class="ml-menu">
+                                <?php
+                                    $query = mysqli_query($link, "SELECT * FROM dyear");
+                                    while($res = mysqli_fetch_array($query)){
+                                ?>
+                                    <li>
+                                        <a href="rpubman.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                    </li>
+                                <?php } ?>
+                                </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                            <i class="material-icons">equalizer</i>
+                            <span>Researches with Track Records</span>
+                        </a>
+                        <ul class="ml-menu">
+                                <?php
+                                    $query = mysqli_query($link, "SELECT * FROM dyear");
+                                    while($res = mysqli_fetch_array($query)){
+                                ?>
+                                    <li>
+                                        <a href="trackexport.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                    </li>
+                                <?php } ?>
+                                </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                            <i class="material-icons">group</i>
+                            <span>Extension</span>
+                        </a>
+                        <ul class="ml-menu">
+                                <?php
+                                    $query = mysqli_query($link, "SELECT * FROM dyear");
+                                    while($res = mysqli_fetch_array($query)){
+                                ?>
+                                    <li>
+                                        <a href="extdata.php?period=<?php echo $res['year']; ?>" class=" waves-effect waves-block"><?php echo $res['year']; ?></a>
+                                    </li>
+                                <?php } ?>
+                                </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
                             <i class="material-icons">settings</i>
                             <span>Data Mining</span>
                         </a>

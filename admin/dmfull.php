@@ -74,10 +74,10 @@ if(isset($_GET['logout'])){
     </script>
 </head>
 
-<body class="theme-red" onload="init()">
+<body class="theme-blue" onload="init()">
             <div class="block-header">
                 <h2>
-                    Performance Analysis using CHAID Algorithm
+                    Performance Analysis using Classification and Regression Tree Analysis
                     <small>View in Minimal Screen? <a href="dm.php?period=<?php echo $_GET['period'] ?>">Click Here</a></small>
                 </h2>
             </div>

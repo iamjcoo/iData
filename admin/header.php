@@ -59,7 +59,20 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">
+                                        <a href="year.php">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">access_time</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Year</h4>
+                                                <p>
+                                                    <i class="material-icons">create</i> create or edit period
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="du.php">
                                             <div class="icon-circle bg-red">
                                                 <i class="material-icons">comment</i>
                                             </div>

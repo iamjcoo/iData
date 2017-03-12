@@ -30,8 +30,8 @@
                         $te = $telp + $tety;
                         $fail = $te - $tng;
                         $pass = $tng;
-                        $fperc = ($fail / $te) * 100;
-                        $pperc = ($pass / $te) * 100;
+                        @$fperc = ($fail / $te) * 100;
+                        @$pperc = ($pass / $te) * 100;
                         $_SESSION['tne'] = $te;
 
                   ?>{"key":"1", "name":"CSPC", "failp":"<?php echo round($fperc, 2, PHP_ROUND_HALF_UP); ?>", "fail":"<?php echo $fail; ?>", "passp":"<?php echo round($pperc, 2, PHP_ROUND_HALF_UP); ?>", "pass":"<?php echo $pass; ?>", "totalp":"<?php echo $fperc + $pperc; ?>", "totale":"<?php echo $fail + $pass; ?>", "node":"0"},
@@ -73,7 +73,7 @@
                         @$fperc = ($fail / $te) * 100;
                         @$pperc = ($pass / $te) * 100;
                         $tne = $_SESSION['tne'];
-                        $tp = (($fail + $pass) / $tne) * 100;
+                        @$tp = (($fail + $pass) / $tne) * 100;
                         ?>
                         {"key":"<?php echo $key = $key + 1; $dnode = $key; ?>", "name":"<?php echo $res['acronym']; ?>", "failp":"<?php echo round($fperc, 2, PHP_ROUND_HALF_UP); ?>", "fail":"<?php echo $fail; ?>", "passp":"<?php echo round($pperc, 2, PHP_ROUND_HALF_UP); ?>", "pass":"<?php echo $pass; ?>", "totalp":"<?php echo round($tp, 2, PHP_ROUND_HALF_UP); ?>", "totale":"<?php echo $tot = $fail + $pass; ?>", "node":"<?php echo $node = $node + 1; ?>", "parent":"1"}
 

@@ -15,38 +15,7 @@
     if(isset($_SESSION['idataextension'])!=""){
         header('Location: extension/index.php');
     }
-    if(isset($_POST['login'])){
-        $uname = $_POST['username'];
-        $pwd = md5($_POST['password']);
-
-        $query = mysqli_query($link, "SELECT * FROM user WHERE username = '$uname' AND password = '$pwd'");
-        $rnum = mysqli_num_rows($query);
-        $res = mysqli_fetch_assoc($query);
-        if($rnum>=1){
-            if($res['restriction']=="Administrator"){
-                $_SESSION['idataadmin'] = $uname;
-                $_SESSION['idataadminid'] = $res['id'];
-                header('Location: admin/index.php');
-            }else if($res['restriction']=="Registrar"){
-                $_SESSION['idataregistrar'] = $uname;
-                 $_SESSION['idataregistrarid'] = $res['id'];
-                header('Location: registrar/index.php');
-            }else if($res['restriction']=="Research"){
-                $_SESSION['idataresearch'] = $uname;
-                 $_SESSION['idataresearchid'] = $res['id'];
-                header('Location: research/index.php');
-            }else if($res['restriction']=="Extension"){
-                $_SESSION['idataextension'] = $uname;
-                $_SESSION['idataextensionid'] = $res['id'];
-                header('Location: extension/index.php');
-            }
-        }else{
-            echo '<div class="alert alert-danger">
-                                <strong>Oh snap!</strong> You have submitted a wrong email and password.
-                            </div>';
-        }
-        
-    }
+    
 
 ?>
 <!DOCTYPE html>
@@ -98,7 +67,43 @@
     </script>
 </head>
 
-<body class="login-page" style="background-image: url(extra/images/bg.jpg); background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;">
+<body class="login-page" style="background-image: url(extra/images/bg.jpg); background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover; -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;">
+  <?php
+    if(isset($_POST['login'])){
+        $uname = $_POST['username'];
+        $pwd = md5($_POST['password']);
+
+        $query = mysqli_query($link, "SELECT * FROM user WHERE username = '$uname' AND password = '$pwd'");
+        $rnum = mysqli_num_rows($query);
+        $res = mysqli_fetch_assoc($query);
+        if($rnum>=1){
+            if($res['restriction']=="Administrator"){
+                $_SESSION['idataadmin'] = $uname;
+                $_SESSION['idataadminid'] = $res['id'];
+                header('Location: admin/index.php');
+            }else if($res['restriction']=="Registrar"){
+                $_SESSION['idataregistrar'] = $uname;
+                 $_SESSION['idataregistrarid'] = $res['id'];
+                header('Location: registrar/index.php');
+            }else if($res['restriction']=="Research"){
+                $_SESSION['idataresearch'] = $uname;
+                 $_SESSION['idataresearchid'] = $res['id'];
+                header('Location: research/index.php');
+            }else if($res['restriction']=="Extension"){
+                $_SESSION['idataextension'] = $uname;
+                $_SESSION['idataextensionid'] = $res['id'];
+                header('Location: extension/index.php');
+            }
+        }else{
+            echo '<div class="alert alert-danger">
+                                <strong>Oh snap!</strong> You have submitted a wrong email and password.
+                            </div>';
+        }
+        
+    }
+    ?>
     <div class="login-box">
         <div class="logo">
             <a href="javascript:void(0);"><b>iData</b></a>
